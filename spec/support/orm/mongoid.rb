@@ -13,7 +13,7 @@ module Doorkeeper
   class PlaceholderApplicationOwner
     include Mongoid::Document
 
-    self.store_in :placeholder_application_owners
+    # self.store_in :placeholder_application_owners
     has_many :applications
 
   end

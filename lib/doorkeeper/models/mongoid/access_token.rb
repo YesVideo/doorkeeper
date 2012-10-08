@@ -8,15 +8,15 @@ module Doorkeeper
     include Doorkeeper::Models::Mongoid::Revocable
     include Doorkeeper::Models::Mongoid::Scopes
 
-    self.store_in :oauth_access_tokens
+    # self.store_in :oauth_access_tokens
 
-    field :resource_owner_id, :type => Integer
+    field :resource_owner_id, :type => String
     field :token, :type => String
     field :expires_in, :type => Integer
     field :revoked_at, :type => DateTime
 
-    index :token, :unique => true
-    index :refresh_token, :unique => true, :sparse => true
+    index({token:1}, {unique: true})
+    index({refresh_token:1}, {unique: true, sparse: true})
 
     def self.last_authorized_token_for(application, resource_owner_id)
       where(:application_id => application.id,
